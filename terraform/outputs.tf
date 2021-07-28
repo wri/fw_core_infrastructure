@@ -31,6 +31,12 @@ output "ecs_cluster_id" {
   value = module.cluster.cluster_id
 }
 
+
+output "ecs_cluster_name" {
+  value = module.cluster.cluster_name
+}
+
+
 output "document_db_endpoint" {
   value = module.documentdb.endpoint
 }
