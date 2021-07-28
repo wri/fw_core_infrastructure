@@ -2,12 +2,17 @@ output "lb_dns_name" {
   value = module.loadbalancer.dns_name
 }
 
+output "lb_arm" {
+  value = module.loadbalancer.arn
+}
+
 output "lb_listener_arn"{
   value = module.loadbalancer.listener_arn
 }
 
-output "lb_security_group_arn" {
-  value = module.loadbalancer.security_group_arn
+
+output "lb_security_group_id" {
+  value = module.loadbalancer.security_group_id
 }
 
 output "vpc_private_subnet_ids" {
@@ -42,8 +47,8 @@ output "document_db_cluster_name" {
   value = module.documentdb.cluster_name
 }
 
-output "document_db_security_group_arn" {
-  value = module.documentdb.security_group_arn
+output "document_db_security_group_id" {
+  value = module.documentdb.security_group_id
 }
 
 output "document_db_secrets_arn" {
