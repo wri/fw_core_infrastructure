@@ -1,5 +1,13 @@
-output "api_gateway_url" {
-  value = module.gateway.api_endpoint
+output "lb_dns_name" {
+  value = module.loadbalancer.dns_name
+}
+
+output "lb_listener_arn"{
+  value = module.loadbalancer.listener_arn
+}
+
+output "lb_security_group_arn" {
+  value = module.loadbalancer.security_group_arn
 }
 
 output "vpc_private_subnet_ids" {
@@ -18,17 +26,6 @@ output "ecs_cluster_id" {
   value = module.cluster.cluster_id
 }
 
-output "lb_arn" {
-  value = module.gateway.load_balancer_arn
-}
-
-output "fw_forms_lb_target_group_arn" {
-  value = module.fw_forms_integration.lb_target_group_arn
-}
-output "fw_forms_lb_target_group_port" {
-  value = module.fw_forms_integration.lb_target_group_port
-}
-
 output "document_db_endpoint" {
   value = module.documentdb.endpoint
 }
@@ -44,7 +41,6 @@ output "document_db_port" {
 output "document_db_cluster_name" {
   value = module.documentdb.cluster_name
 }
-
 
 output "document_db_security_group_arn" {
   value = module.documentdb.security_group_arn

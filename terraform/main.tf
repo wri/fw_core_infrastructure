@@ -12,33 +12,13 @@ module "cluster" {
   tags = local.tags
 }
 
-
-module "gateway" {
-  source = "./modules/gateway"
-  environment = var.environment
+module "loadbalancer" {
+  source = "./modules/loadbalancer"
   project_prefix = var.project_prefix
-  vpc_id = data.terraform_remote_state.core.outputs.vpc_id
-  vpc_private_subnet_ids = data.terraform_remote_state.core.outputs.private_subnet_ids
-  tags = local.tags
-  service_integrations = sha1(jsonencode([module.fw_forms_integration.root_resource, module.fw_forms_integration.proxy_resource]))
-}
-
-
-module "fw_forms_integration" {
-  source = "./modules/service_integration"
-  api_gateway_id = module.gateway.api_gateway_id
-  api_gateway_root_resource_id = module.gateway.api_gateway_root_resource_id
-  environment = var.environment
-  load_balancer_arn = module.gateway.load_balancer_arn
-  load_balancer_dns = module.gateway.load_balancer_dns
-  port = 3001
-  project_prefix = var.project_prefix
-  service_path = "forms"
+  subnet_ids = data.terraform_remote_state.core.outputs.public_subnet_ids
   tags = local.tags
   vpc_id = data.terraform_remote_state.core.outputs.vpc_id
-  vpc_link_id = module.gateway.vpc_link_id
 }
-
 
 module "documentdb" {
   source = "./modules/document_db"
