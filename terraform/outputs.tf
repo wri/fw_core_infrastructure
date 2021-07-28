@@ -2,7 +2,7 @@ output "lb_dns_name" {
   value = module.loadbalancer.dns_name
 }
 
-output "lb_arm" {
+output "lb_arn" {
   value = module.loadbalancer.arn
 }
 
