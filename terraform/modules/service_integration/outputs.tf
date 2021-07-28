@@ -5,3 +5,11 @@ output "lb_target_group_arn" {
 output "lb_target_group_port" {
   value = aws_lb_target_group.default.port
 }
+
+output "root_resource" {
+  value = aws_api_gateway_resource.service_root
+}
+
+output "proxy_resource" {
+  value = aws_api_gateway_resource.proxy
+}

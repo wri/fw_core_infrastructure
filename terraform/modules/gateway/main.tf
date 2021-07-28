@@ -18,17 +18,24 @@ resource "aws_api_gateway_rest_api" "default" {
 
 
 resource "aws_api_gateway_deployment" "default" {
-  depends_on = var.api_gateway_integratons
 
   rest_api_id = aws_api_gateway_rest_api.default.id
-  stage_name  = "default"
+  stage_name  = "${var.project_prefix}-api_gateway_deployment"
+
+   triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.default.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
-data "aws_subnet" "private_subnet" {
-  count = length(var.vpc_private_subnet_ids)
-  id    = var.vpc_private_subnet_ids[count.index]
+resource "aws_api_gateway_stage" "default" {
+  deployment_id = aws_api_gateway_deployment.default.id
+  rest_api_id   = aws_api_gateway_rest_api.default.id
+  stage_name    = "${var.project_prefix}-api_gateway_stage"
 }
-
 
 #
 # NLB Resources

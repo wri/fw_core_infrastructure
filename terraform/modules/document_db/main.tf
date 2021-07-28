@@ -164,7 +164,7 @@ resource "aws_secretsmanager_secret_version" "documentdb" {
 }
 
 data "template_file" "secrets_documentdb" {
-  template = file("${path.root}/policies/iam_policy_secrets_read.json.tpl")
+  template = file("${path.module}/templates/iam_policy_secrets_read.json.tpl")
   vars = {
     secret_arn = aws_secretsmanager_secret.documentdb.arn
   }

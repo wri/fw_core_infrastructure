@@ -2,7 +2,7 @@
 
 
 resource "aws_lb_target_group" "default" {
-  name        = "${var.project_prefix}_target_group_${var.service_path}"
+  name        = "${var.project_prefix}-target-group-${var.service_path}"
   port        = var.port
   protocol    = "TCP"
   target_type = "ip"
@@ -36,13 +36,13 @@ resource "aws_lb_listener" "default" {
 resource "aws_api_gateway_resource" "service_root" {
   rest_api_id = var.api_gateway_id
   parent_id   = var.api_gateway_root_resource_id
-  path_part   = "${var.service_path}"
+  path_part   = var.service_path
 }
 
 
 resource "aws_api_gateway_method" "service_root" {
   rest_api_id   =  var.api_gateway_id
-  resource_id   = aws_api_gateway_method.service_root.resource_id
+  resource_id   = aws_api_gateway_resource.service_root.id
   http_method   = "ANY"
   authorization = "NONE"
 }
@@ -55,7 +55,7 @@ resource "aws_api_gateway_integration" "nlb_root" {
   integration_http_method = "ANY"
   type                    = "HTTP_PROXY"
   connection_type         = "VPC_LINK"
-  connection_id           = "${var.vpc_link_id}"
+  connection_id           = var.vpc_link_id
   uri                     = "http://${var.load_balancer_dns}"
 }
 

@@ -29,5 +29,6 @@ variable "db_instance_count" {
 }
 
 variable "db_logs_exports" {
-  type = bool
+  type  = list(string)
+  default = ["audit", "profiler"]
 }

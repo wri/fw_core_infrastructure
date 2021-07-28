@@ -20,7 +20,7 @@ module "gateway" {
   vpc_id = data.terraform_remote_state.core.outputs.vpc_id
   vpc_private_subnet_ids = data.terraform_remote_state.core.outputs.private_subnet_ids
   tags = local.tags
-  api_gateway_integratons = []
+//  service_integrations = [module.fw_forms_integration.root_resource, module.fw_forms_integration.proxy_resource]
 }
 
 
@@ -41,23 +41,23 @@ module "fw_forms_integration" {
 
 
 module "documentdb" {
-  source                          = "./modules/document_db"
-  log_retention_period            = var.log_retention_period
-  private_subnet_ids              = data.terraform_remote_state.core.outputs.private_subnet_ids
-  project                         = var.project_prefix
-  backup_retention_period         = var.backup_retention_period
-  instance_class                  = var.db_instance_class
-  cluster_size                    = var.db_instance_count
-  master_username                 = "wri" # superuser, create app specific users at project level
-  tags                            = local.tags
-  vpc_id                          = data.terraform_remote_state.core.outputs.vpc_id
-  vpc_cidr_block                  = data.terraform_remote_state.core.outputs.cidr_block
-  engine_version                  = "3.6.0"
+  source = "./modules/document_db"
+  log_retention_period = var.log_retention_period
+  private_subnet_ids = data.terraform_remote_state.core.outputs.private_subnet_ids
+  project = var.project_prefix
+  backup_retention_period = var.backup_retention_period
+  instance_class = var.db_instance_class
+  cluster_size = var.db_instance_count
+  master_username = "wri"  # superuser, create app specific users at project level
+  tags = local.tags
+  vpc_id = data.terraform_remote_state.core.outputs.vpc_id
+  vpc_cidr_block = data.terraform_remote_state.core.outputs.cidr_block
+  engine_version = "3.6.0"
   enabled_cloudwatch_logs_exports = var.db_logs_exports
   cluster_parameters = [
     {
       apply_method = "pending-reboot"
-      name         = "tls"
-      value        = "disabled"
-  }]
+      name = "tls"
+      value = "disabled"
+    }]
 }

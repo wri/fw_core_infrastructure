@@ -18,9 +18,10 @@ variable "vpc_private_subnet_ids" {
   description = "A list of VPC public subnet IDs."
 }
 
-variable "api_gateway_integratons" {
-  type = list(string)
-}
+//variable "service_integrations" {
+//  type = list(any)
+//
+//}
 
 variable "tags" {
   default     = {}
