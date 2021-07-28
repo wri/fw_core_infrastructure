@@ -65,7 +65,7 @@ resource "aws_api_gateway_integration" "example" {
 # NLB Resources
 #
 resource "aws_lb" "default" {
-  name                             = "nlb${var.environment}${var.project_prefix}"
+  name                             = "${var.project_prefix}-nlb"
   internal                         = true
   load_balancer_type               = "network"
   enable_cross_zone_load_balancing = true
