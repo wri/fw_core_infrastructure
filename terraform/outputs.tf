@@ -1,3 +1,7 @@
+output "api_gateway_url" {
+  value = module.gateway.api_endpoint
+}
+
 output "vpc_private_subnet_ids" {
   value = data.terraform_remote_state.core.outputs.private_subnet_ids
 }
