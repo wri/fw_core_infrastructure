@@ -20,7 +20,7 @@ module "gateway" {
   vpc_id = data.terraform_remote_state.core.outputs.vpc_id
   vpc_private_subnet_ids = data.terraform_remote_state.core.outputs.private_subnet_ids
   tags = local.tags
-//  service_integrations = [module.fw_forms_integration.root_resource, module.fw_forms_integration.proxy_resource]
+  service_integrations = sha1(jsonencode([module.fw_forms_integration.root_resource, module.fw_forms_integration.proxy_resource]))
 }
 
 

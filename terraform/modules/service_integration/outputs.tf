@@ -7,9 +7,9 @@ output "lb_target_group_port" {
 }
 
 output "root_resource" {
-  value = aws_api_gateway_resource.service_root
+  value = aws_api_gateway_resource.service_root.id
 }
 
 output "proxy_resource" {
-  value = aws_api_gateway_resource.proxy
+  value = aws_api_gateway_resource.proxy.id
 }
