@@ -20,3 +20,11 @@ module "loadbalancer" {
   vpc_id              = data.terraform_remote_state.core.outputs.vpc_id
   acm_certificate_arn = data.terraform_remote_state.core.outputs.acm_certificate
 }
+
+
+module "data_bucket" {
+  source         = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/storage?ref=v0.4.4"
+  bucket_name    = "fw-data${local.bucket_suffix}"
+  project        = var.project_prefix
+  tags           = merge({ Job = "Forest Watcher Data" }, local.tags)
+}
