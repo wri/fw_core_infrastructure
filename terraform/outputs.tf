@@ -51,3 +51,6 @@ output "data_bucket_read_policy_arn" {
   value = module.data_bucket.read_policy_arn
 }
 
+output "tags" {
+  value = local.tags
+}
