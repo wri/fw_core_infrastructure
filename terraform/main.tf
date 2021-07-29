@@ -18,6 +18,7 @@ module "loadbalancer" {
   subnet_ids = data.terraform_remote_state.core.outputs.public_subnet_ids
   tags = local.tags
   vpc_id = data.terraform_remote_state.core.outputs.vpc_id
+  acm_certificate_arn = data.terraform_remote_state.core.outputs.acm_certificate
 }
 
 module "documentdb" {

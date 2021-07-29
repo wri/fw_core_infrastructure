@@ -32,3 +32,7 @@ variable "db_logs_exports" {
   type  = list(string)
   default = ["audit", "profiler"]
 }
+
+variable "public_url" {
+  type = string
+}

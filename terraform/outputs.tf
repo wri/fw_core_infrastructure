@@ -64,3 +64,7 @@ output "document_db_secrets_arn" {
 output "document_db_secrets_policy_arn" {
   value = module.documentdb.secrets_documentdb_policy_arn
 }
+
+output "public_url" {
+  value = var.public_url
+}
