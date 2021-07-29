@@ -8,7 +8,7 @@ locals {
     {
       Job = "Data-API Service",
   }, local.tags)
-  name_suffix           = terraform.workspace == "default" ? "" : "-${terraform.workspace}"
-  project               = "fw"
+  name_suffix = terraform.workspace == "default" ? "" : "-${terraform.workspace}"
+  project     = "fw"
 }
 

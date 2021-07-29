@@ -6,7 +6,7 @@ output "arn" {
   value = aws_lb.default.arn
 }
 
-output "listener_arn"{
+output "listener_arn" {
   value = var.acm_certificate_arn == null ? aws_lb_listener.http[0].arn : aws_lb_listener.https[0].arn
 }
 

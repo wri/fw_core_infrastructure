@@ -11,7 +11,7 @@ variable "tags" {
 }
 
 variable "acm_certificate_arn" {
-  type = string
+  type    = string
   default = null
 }
 
@@ -20,6 +20,6 @@ variable "vpc_id" {
 }
 
 variable "listener_port" {
-  type = number
+  type    = number
   default = 80
 }
