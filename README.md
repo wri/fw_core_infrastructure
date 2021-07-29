@@ -13,3 +13,4 @@ Relevant resouces include
 - Redis Custer
 - Bastion host
 - VPC
+- SSL certificate
