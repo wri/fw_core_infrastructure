@@ -24,7 +24,7 @@ module "loadbalancer" {
 
 module "data_bucket" {
   source         = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/storage?ref=v0.4.4"
-  bucket_name    = "fw-data${local.bucket_suffix}"
+  bucket_name    = "gfw-fw-data${local.bucket_suffix}"
   project        = var.project_prefix
   tags           = merge({ Job = "Forest Watcher Data" }, local.tags)
 }
