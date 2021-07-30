@@ -23,8 +23,16 @@ module "loadbalancer" {
 
 
 module "data_bucket" {
-  source         = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/storage?ref=v0.4.4"
+  source         = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/storage?ref=v0.5.0"
   bucket_name    = "gfw-fw-data${local.bucket_suffix}"
   project        = var.project_prefix
   tags           = merge({ Job = "Forest Watcher Data" }, local.tags)
+}
+
+
+module "api_key_secret" {
+  source        = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/secrets?ref=v0.5.0"
+  project       = var.project_prefix
+  name          = "${var.project_prefix}-gfw_data_api_key"
+  secret_string = var.gfw_data_api_key
 }

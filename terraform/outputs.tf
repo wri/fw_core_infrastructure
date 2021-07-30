@@ -54,3 +54,11 @@ output "data_bucket_read_policy_arn" {
 output "tags" {
   value = local.tags
 }
+
+output "gfw_data_api_key_secret_arn" {
+  value = module.api_key_secret.secret_arn
+}
+
+output "gfw_data_api_key_secret_policy_arn" {
+  value = module.api_key_secret.read_policy_arn
+}
