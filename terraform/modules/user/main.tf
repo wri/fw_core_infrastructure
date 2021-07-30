@@ -13,3 +13,10 @@ resource "aws_iam_user" "default" {
 resource "aws_iam_access_key" "default" {
   user = aws_iam_user.default.name
 }
+
+
+resource "aws_iam_user_ssh_key" "default" {
+  username   = aws_iam_user.default.name
+  encoding   = var.key_encoding
+  public_key = var.public_key
+}

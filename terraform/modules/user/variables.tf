@@ -22,3 +22,11 @@ variable "force_destroy" {
   default = true
   type    = bool
 }
+
+variable "key_encoding" {
+  type = string
+  default = "SSH"
+}
+variable "public_key" {
+  type = string
+}
