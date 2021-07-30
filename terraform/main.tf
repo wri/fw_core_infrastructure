@@ -44,7 +44,6 @@ module "user_sdavidge_3sc" {
   organization = "3SidedCube"
   tags = local.tags
   user_name = "sdavidge_3sc"
-
 }
 
 module "user_tyeadon_3sc" {
@@ -54,7 +53,6 @@ module "user_tyeadon_3sc" {
   organization = "3SidedCube"
   tags = local.tags
   user_name = "tyeadon_3sc"
-
 }
 
 module "user_bsherred_3sc" {
@@ -64,7 +62,6 @@ module "user_bsherred_3sc" {
   organization = "3SidedCube"
   tags = local.tags
   user_name = "bsherred_3sc"
-
 }
 
 module "user_jsantos_3sc" {
@@ -74,7 +71,6 @@ module "user_jsantos_3sc" {
   organization = "3SidedCube"
   tags = local.tags
   user_name = "jsantos_3sc"
-
 }
 
 module "user_wkelsey_3sc" {
@@ -84,7 +80,6 @@ module "user_wkelsey_3sc" {
   organization = "3SidedCube"
   tags = local.tags
   user_name = "wkelsey_3sc"
-
 }
 
 module "s3c_developers" {
@@ -93,4 +88,5 @@ module "s3c_developers" {
   policy_arns = ["arn:aws:iam::aws:policy/ReadOnlyAccess", module.data_bucket.write_policy_arns, data.terraform_remote_state.core.outputs.document_db_secrets_policy_arn,]
   users = [module.user_bsherred_3sc.name, module.user_jsantos_3sc.name, module.user_sdavidge_3sc.name,
   module.user_tyeadon_3sc.name, module.user_wkelsey_3sc.name]
+  path = "/users/"
 }
