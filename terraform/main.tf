@@ -84,6 +84,7 @@ module "user_wkelsey_3sc" {
 
 module "s3c_developers" {
   source = "./modules/group"
+  project_prefix = var.project_prefix
   name   = "s3c_developers"
   policy_arns = ["arn:aws:iam::aws:policy/ReadOnlyAccess",
     module.data_bucket.write_policy_arns[0],

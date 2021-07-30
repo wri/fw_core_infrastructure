@@ -5,10 +5,8 @@ resource "aws_iam_group" "default" {
 }
 
 resource "aws_iam_group_membership" "default" {
-  name = "tf-testing-group-membership"
-
+  name = "${var.project_prefix}-${aws_iam_group.default.name}-membership"
   users = var.users
-
   group = aws_iam_group.default.name
 }
 

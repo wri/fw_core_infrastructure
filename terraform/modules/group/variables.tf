@@ -13,3 +13,7 @@ variable "users" {
 variable "policy_arns" {
   type = list(string)
 }
+
+variable "project_prefix" {
+  type = string
+}
