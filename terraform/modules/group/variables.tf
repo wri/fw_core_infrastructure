@@ -11,5 +11,5 @@ variable "users" {
 }
 
 variable "policy_arns" {
-  type = string
+  type = list(string)
 }
