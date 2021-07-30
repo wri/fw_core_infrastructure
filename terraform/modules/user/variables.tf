@@ -2,7 +2,7 @@ variable "user_name" {
   type = string
 }
 variable "path" {
-  type = string
+  type    = string
   default = "/"
 }
 variable "full_name" {
@@ -20,5 +20,5 @@ variable "tags" {
 
 variable "force_destroy" {
   default = true
-  type = bool
+  type    = bool
 }
