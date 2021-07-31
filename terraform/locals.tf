@@ -3,7 +3,7 @@
 locals {
   bucket_suffix   = var.environment == "production" ? "" : "-${var.environment}"
   tf_state_bucket = "gfw-terraform${local.bucket_suffix}"
-  tags            = data.terraform_remote_state.core.outputs.tags
+  tags            = merge(data.terraform_remote_state.core.outputs.tags, {Project = var.project})
   fargate_tags = merge(
     {
       Job = "Data-API Service",

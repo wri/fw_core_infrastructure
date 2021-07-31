@@ -1,6 +1,6 @@
 variable "project" {
   type    = string
-  default = "Forest watcher"
+  default = "Forest Watcher"
 }
 
 variable "project_prefix" {
