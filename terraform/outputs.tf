@@ -62,3 +62,7 @@ output "gfw_data_api_key_secret_arn" {
 output "gfw_data_api_key_secret_policy_arn" {
   value = module.api_key_secret.read_policy_arn
 }
+
+output "public_keys" {
+  value = [module.user_wkelsey_3sc.public_key, module.user_tyeadon_3sc.public_key, module.user_sdavidge_3sc.public_key, module.user_jsantos_3sc.public_key, module.user_bsherred_3sc.public_key]
+}
