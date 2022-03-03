@@ -35,7 +35,7 @@ resource "aws_lb_listener_rule" "forward" {
   }
   condition {
     path_pattern {
-      values = ["/v1/"]
+      values = ["/v1/*"]
     }
   }
 }
