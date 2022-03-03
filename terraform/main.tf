@@ -21,6 +21,25 @@ module "loadbalancer" {
   acm_certificate_arn = data.terraform_remote_state.core.outputs.acm_certificate
 }
 
+# Forward all other traffic to other address
+resource "aws_lb_listener_rule" "forward" {
+  listener_arn = module.loadbalancer.listener_arn
+  priority     = 100
+  action {
+    type = "redirect"
+
+    redirect {
+      host        = var.production_applications_fqdn
+      status_code = "HTTP_301"
+    }
+  }
+  condition {
+    path_pattern {
+      values = ["/v1/"]
+    }
+  }
+}
+
 
 module "data_bucket" {
   source      = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/storage?ref=v0.5.0"
