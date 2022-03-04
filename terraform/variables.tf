@@ -19,3 +19,7 @@ variable "public_url" {
 variable "gfw_data_api_key" {
   type = string
 }
+
+variable "production_applications_fqdn" {
+  type = string
+}
