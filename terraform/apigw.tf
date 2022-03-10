@@ -14,7 +14,7 @@ resource "aws_lb" "apigw" {
 
 
 resource "aws_lb_target_group" "apigw_http" {
-  name = trimsuffix(replace(substr("${var.project_prefix}-apigw-tg", 0, 16), "_", "-"), "-")
+  name_prefix = trimsuffix(replace(substr("${var.project_prefix}-apigw-tg", 0, 6), "_", "-"), "-")
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.core.outputs.vpc_id
