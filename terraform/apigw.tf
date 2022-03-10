@@ -32,6 +32,10 @@ resource "aws_lb_target_group_attachment" "apigw_http" {
   target_group_arn = aws_lb_target_group.apigw_http.arn
   target_id = split("/",data.terraform_remote_state.core.outputs.api_gw_instance_arn)[1]
   port = 80
+
+  depends_on = [
+    aws_lb_listener.http
+  ]
 }
 
 # use this resource as listener if no SSL certificate was provided (HTTP only)
@@ -45,6 +49,9 @@ resource "aws_lb_listener" "http" {
     type = "forward"
     target_group_arn = aws_lb_target_group.apigw_http.id
   }
+  depends_on = [
+    aws_lb_target_group.apigw_http
+  ]
 }
 
 
