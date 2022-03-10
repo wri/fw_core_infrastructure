@@ -115,6 +115,15 @@ resource "aws_security_group" "lb" {
     "0.0.0.0/0"]
   }
 
+  egress = {
+    protocol = "tcp"
+    from_port = 80
+    to_port = 80
+    cidr_blocks = [
+      data.terraform_remote_state.core.outputs.cidr_block
+    ]
+  }
+
   tags = merge(
     {
       Name = "${var.project_prefix}-apigw-alb"
