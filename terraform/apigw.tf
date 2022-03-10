@@ -18,8 +18,12 @@ resource "aws_lb_target_group" "apigw_http" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.core.outputs.vpc_id
-  target_type = "ip"
+  target_type = "instance"
   tags = local.tags
+
+  health_check {
+    enabled = false
+  }
 }
 
 resource "aws_lb_target_group_attachment" "apigw_http" {
