@@ -14,7 +14,7 @@ resource "aws_lb" "apigw" {
 
 
 resource "aws_lb_target_group" "apigw_http" {
-  name_prefix = trimsuffix(replace(substr("${var.project_prefix}-apigw-tg", 0, 6), "_", "-"), "-")
+  name_prefix = trimsuffix(replace(substr("${var.project_prefix}-apigw-tg", 0, 12), "_", "-"), "-")
   port     = 80
   protocol = "HTTP"
   vpc_id   = data.terraform_remote_state.core.outputs.vpc_id
@@ -115,10 +115,18 @@ resource "aws_security_group" "lb" {
     "0.0.0.0/0"]
   }
 
-  egress = {
+  egress {
     protocol = "tcp"
     from_port = 80
     to_port = 80
+    cidr_blocks = [
+      data.terraform_remote_state.core.outputs.cidr_block
+    ]
+  }
+  egress {
+    protocol = "tcp"
+    from_port = 443
+    to_port = 443
     cidr_blocks = [
       data.terraform_remote_state.core.outputs.cidr_block
     ]
