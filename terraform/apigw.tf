@@ -22,7 +22,9 @@ resource "aws_lb_target_group" "apigw_http" {
   tags = local.tags
 
   health_check {
-    enabled = false
+    enabled = true
+    path = "/status"
+    matcher = "200,202"
   }
 }
 
