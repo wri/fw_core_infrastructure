@@ -22,7 +22,9 @@ resource "aws_lb_target_group" "apigw_http" {
   tags = local.tags
 
   health_check {
-    enabled = false
+    enabled = true
+    path = "/status"
+    matcher = "200,202"
   }
 }
 
@@ -30,8 +32,11 @@ resource "aws_lb_target_group_attachment" "apigw_http" {
   target_group_arn = aws_lb_target_group.apigw_http.arn
   target_id = split("/",data.terraform_remote_state.core.outputs.api_gw_instance_arn)[1]
   port = 80
-}
 
+  depends_on = [
+    aws_lb_listener.http_https
+  ]
+}
 # use this resource as listener if no SSL certificate was provided (HTTP only)
 # will listen on specified listener port (default 80)
 # resource "aws_lb_listener" "http" {
@@ -111,6 +116,23 @@ resource "aws_security_group" "lb" {
     to_port   = 443
     cidr_blocks = [
     "0.0.0.0/0"]
+  }
+
+  egress {
+    protocol = "tcp"
+    from_port = 80
+    to_port = 80
+    cidr_blocks = [
+      data.terraform_remote_state.core.outputs.cidr_block
+    ]
+  }
+  egress {
+    protocol = "tcp"
+    from_port = 443
+    to_port = 443
+    cidr_blocks = [
+      data.terraform_remote_state.core.outputs.cidr_block
+    ]
   }
 
   tags = merge(
