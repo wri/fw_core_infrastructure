@@ -34,7 +34,7 @@ resource "aws_lb_target_group_attachment" "apigw_http" {
   port = 80
 
   depends_on = [
-    aws_lb_listener.http
+    aws_lb_listener.http_https
   ]
 }
 # use this resource as listener if no SSL certificate was provided (HTTP only)
@@ -65,27 +65,6 @@ resource "aws_lb_listener" "http_https" {
       port        = "443"
       protocol    = "HTTPS"
       status_code = "HTTP_301"
-    }
-  }
-}
-
-
-# If SSL certificate present, use this resource as listener
-# listener port will be ignored
-resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.apigw.arn
-  port              = 443
-  protocol          = "HTTPS"
-  certificate_arn   = data.terraform_remote_state.core.outputs.acm_certificate
-  default_action {
-    type = "fixed-response"
-    fixed_response {
-      content_type = "application/json"
-      message_body = jsonencode({
-        data : {},
-        status : "success"
-      })
-      status_code = 200
     }
   }
 }
