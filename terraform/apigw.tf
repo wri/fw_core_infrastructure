@@ -79,7 +79,7 @@ resource "aws_lb_listener" "https" {
   certificate_arn   = data.terraform_remote_state.core.outputs.acm_certificate
   default_action {
     type = "forward"
-    target_group_arn = aws_lb_target_group.apigw_http.id
+    target_group_arn = "${aws_lb_target_group.apigw_http.id}"
   }
 }
 
