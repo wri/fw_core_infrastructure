@@ -34,7 +34,7 @@ resource "aws_lb_target_group_attachment" "apigw_http" {
   port = 80
 
   depends_on = [
-    aws_lb_listener.http
+    aws_lb_listener.http_https
   ]
 }
 # use this resource as listener if no SSL certificate was provided (HTTP only)
