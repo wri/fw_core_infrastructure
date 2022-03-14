@@ -91,27 +91,6 @@ resource "aws_lb_listener" "https" {
 }
 
 
-# If SSL certificate present, use this resource as listener
-# listener port will be ignored
-resource "aws_lb_listener" "https" {
-  load_balancer_arn = aws_lb.apigw.arn
-  port              = 443
-  protocol          = "HTTPS"
-  certificate_arn   = data.terraform_remote_state.core.outputs.acm_certificate
-  default_action {
-    type = "fixed-response"
-    fixed_response {
-      content_type = "application/json"
-      message_body = jsonencode({
-        data : {},
-        status : "success"
-      })
-      status_code = 200
-    }
-  }
-}
-
-
 ###
 
 # ALB Security group
