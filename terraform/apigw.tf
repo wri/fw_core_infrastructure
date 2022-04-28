@@ -220,14 +220,14 @@ resource "aws_instance" "apigw" {
   )
 }
 
-resource "aws_eip" "apigw" {
-  vpc = true
-}
+# resource "aws_eip" "apigw" {
+#   vpc = true
+# }
 
-resource "aws_eip_association" "apigw_eip_assoc" {
-  instance_id   = aws_instance.apigw.id
-  allocation_id = aws_eip.apigw.id
-}
+# resource "aws_eip_association" "apigw_eip_assoc" {
+#   instance_id   = aws_instance.apigw.id
+#   allocation_id = aws_eip.apigw.id
+# }
 
 # -------------
 # ApiGW Outputs
