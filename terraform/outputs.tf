@@ -63,6 +63,10 @@ output "gfw_data_api_key_secret_policy_arn" {
   value = module.api_key_secret.read_policy_arn
 }
 
+output "microservice_token_secret_arn" {
+  value = module.microservice_token_secret.secret_arn
+}
+
 output "public_keys" {
   value = [module.user_tyeadon_3sc.public_key, module.user_oevans_3sc.public_key, module.user_gcrosby_3sc.public_key]
 }
