@@ -20,8 +20,10 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_production }}
         AWS_REGION: ${{ secrets.aws_region_production }}
         GFW_DATA_API_KEY: ${{ secrets.gfw_data_api_key }}
+        MICROSERVICE_TOKEN: ${{ secrets.microservice_token }}
       run: |
-        ./scripts/infra plan -var "gfw_data_api_key=${GFW_DATA_API_KEY}"
+        ./scripts/infra plan -var "gfw_data_api_key=${GFW_DATA_API_KEY}" \
+                             -var "microservice_token_secret_string=${MICROSERVICE_TOKEN}"
         ./scripts/infra apply
     - name: Deploy staging
       if: success() && github.ref == 'refs/heads/staging'
@@ -31,8 +33,10 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_staging }}
         AWS_REGION: ${{ secrets.aws_region_staging }}
         GFW_DATA_API_KEY: ${{ secrets.gfw_data_api_key }}
+        MICROSERVICE_TOKEN: ${{ secrets.microservice_token }}
       run: |
-        ./scripts/infra plan -var "gfw_data_api_key=${GFW_DATA_API_KEY}"
+        ./scripts/infra plan -var "gfw_data_api_key=${GFW_DATA_API_KEY}" \
+                             -var "microservice_token_secret_string=${MICROSERVICE_TOKEN}"
         ./scripts/infra apply
     - name: Deploy dev
       if: success() && github.ref == 'refs/heads/dev'
@@ -42,6 +46,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_dev }}
         AWS_REGION: ${{ secrets.aws_region_dev }}
         GFW_DATA_API_KEY: ${{ secrets.gfw_data_api_key }}
+        MICROSERVICE_TOKEN: ${{ secrets.microservice_token }}
       run: |
-        ./scripts/infra plan -var "gfw_data_api_key=${GFW_DATA_API_KEY}"
+        ./scripts/infra plan -var "gfw_data_api_key=${GFW_DATA_API_KEY}" \
+                             -var "microservice_token_secret_string=${MICROSERVICE_TOKEN}"
         ./scripts/infra apply

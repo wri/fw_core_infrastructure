@@ -41,7 +41,7 @@ module "microservice_token_secret" {
   source        = "git::https://github.com/wri/gfw-terraform-modules.git//terraform/modules/secrets?ref=v0.5.1"
   project       = var.project_prefix
   name          = "${var.project_prefix}-service-token"
-  secret_string = "token"
+  secret_string = var.microservice_token_secret_string
 }
 
 module "user_tyeadon_3sc" {
