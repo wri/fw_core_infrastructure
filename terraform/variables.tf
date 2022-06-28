@@ -19,3 +19,7 @@ variable "public_url" {
 variable "gfw_data_api_key" {
   type = string
 }
+
+variable "microservice_token_secret_string" {
+  type    = string
+}
